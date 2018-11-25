@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: 
+  title: MyString
+  description: MyText
+  type: 
+  numberOfPages: 1
+  thumbnailUrl: MyText
+
+two:
+  user: 
+  title: MyString
+  description: MyText
+  type: 
+  numberOfPages: 1
+  thumbnailUrl: MyText
