@@ -7,7 +7,7 @@ module V1
             @current_author = author      
             render json: @current_author;
         else
-            render json: @author.errors, status: :unprocessable_entity
+            render json: @author&.errors, status: :unprocessable_entity
         end
       end
 

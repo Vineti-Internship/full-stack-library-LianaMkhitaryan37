@@ -5,7 +5,6 @@ module V1
     # GET /authors
     def index
       @authors = Author.all
-
       render json: @authors
     end
 
