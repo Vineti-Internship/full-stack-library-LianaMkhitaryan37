@@ -17,8 +17,9 @@ module V1
     # POST /authors
     def create
       @author = Author.new(author_params)
+      authorize @author
 
-      if @author.save
+      if @author&.save
         render json: @author, status: :created, location: @author
       else
         render json: @author.errors, status: :unprocessable_entity
@@ -47,7 +48,7 @@ module V1
 
       # Only allow a trusted parameter "white list" through.
       def author_params
-        params.require(:author).permit(:userName, :email, :password)
+        params.require(:author).permit(:email, :password, :password_confirmation,:FullName,:bio,:imageUrl)
       end
   end
 end
