@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
 
-  devise_for :authors
   # devise_for :authors
+  # # devise_for :authors
   scope 'api' do
     namespace :v1 do
       resources :books
       resources :authors
-      resources :sessions, only: [:create, :destroy]
+      # resources :sessions, only: [:create, :destroy]
 
     end
   end
