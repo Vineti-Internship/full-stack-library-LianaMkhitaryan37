@@ -29,7 +29,11 @@ class Modal extends React.Component {
                         <div className="avatar"> 
                             <img src="https://i.ibb.co/f099PXV/avatar.png" alt="Avatar" />
                         </div>
+<<<<<<< HEAD
                         <h4 className="modal-title">{this.props.type}</h4>
+=======
+                        <h4 className="modal-title">Edit</h4>
+>>>>>>> 33a4d6c88e14d5b2db39c6023eaa96ab270b78a1
 
                         <button type="button" className="close" data-dismiss="modal" aria-hidden="true">×</button> 
                     </div>
@@ -39,7 +43,11 @@ class Modal extends React.Component {
                     <div className="modal-footer">
 
                         <div className="col">
+<<<<<<< HEAD
                             <span className="btn" >Check fields careffully </span><br /> 
+=======
+                            <span className="btn" >Check changes careffully </span><br /> 
+>>>>>>> 33a4d6c88e14d5b2db39c6023eaa96ab270b78a1
                 
                         </div>
                 
