@@ -27,9 +27,9 @@ class EditLink extends React.PureComponent{
     render() {
         return (
             <React.Fragment>
-                <span onClick={this.handleModalShowClick}  className="card-link">Edit</span>    
+                <span onClick={this.handleModalShowClick}  className="card-link">{this.props.type}</span>    
                 {this.state.showModal ? (
-                    <Modal handleModalCloseClick={this.handleModalCloseClick}>
+                    <Modal type={this.props.type} handleModalCloseClick={this.handleModalCloseClick}>
                        {this.props.children}
                     </Modal> 
                  

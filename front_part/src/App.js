@@ -4,6 +4,7 @@ import './App.css';
 import {AuthorContext} from './context/authors_context'
 // import Book from './components/book'
 import Author from './components/author';
+import CreateButton from './components/createButton';
 
 class App extends React.PureComponent {
   constructor() {
@@ -11,11 +12,38 @@ class App extends React.PureComponent {
       this.state = { 
         isLoading: true,  
         data: null,
-        deleteFromContext : (index) => {
+        deleteFromContext : (id) => {
           const ncontext = [...this.state.data];
+          const index = ncontext.findIndex(x => x.id===id)
           ncontext.splice(index,1)
           this.setState({data : ncontext})
+        },
+        addToContext :(newElem) =>{
+          // try{
+          //   fetch('http://localhost:3000/api/v1/authors')
+          //   .then(response => response.json())
+          //   .then(data => this.setState({isLoading: false ,data }));
+          // }
+          const ncontext = [...this.state.data,newElem];
+          this.setState({data : ncontext})
+        },
+        updateContext: (id,el) =>{
+          const ncontext = [...this.state.data];
+          const i = ncontext.findIndex(x => x.id===id)
+          ncontext[i] ={...ncontext[i],...el};
+          console.log(ncontext)
+          this.setState({data : ncontext})
         }
+        // updateContext(){
+        //   try{
+        //     fetch('http://localhost:3000/api/v1/authors')
+        //     .then(response => response.json())
+        //     .then(data => this.setState({isLoading: false ,data }));
+        //   }
+        //   catch(e){
+        //     console.log(e);
+        //   }
+        // }
       }
   }
 
@@ -37,15 +65,18 @@ class App extends React.PureComponent {
     }    
       return (
         <AuthorContext.Provider value={
-          // authors : {
-         [   this.state.data,this.state.deleteFromContext]
-          // },
-          //  this.state.deleteFromContext(i)
+         {  data: this.state.data,deleteAction:this.state.deleteFromContext,
+          updateContext: this.state.updateContext,
+          addToContext: this.state.addToContext
+        }
+
           }>
           <div className="App">
-            <h1>Authors</h1>
+            <div><span> Authors </span>
+            <CreateButton  /></div>
             <Author />
-
+            {/* handleAdd={this.state.addToContext} */}
+           
           </div>
         </AuthorContext.Provider>
     )

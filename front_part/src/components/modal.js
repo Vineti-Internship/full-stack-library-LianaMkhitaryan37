@@ -29,7 +29,7 @@ class Modal extends React.Component {
                         <div className="avatar"> 
                             <img src="https://i.ibb.co/f099PXV/avatar.png" alt="Avatar" />
                         </div>
-                        <h4 className="modal-title">Edit</h4>
+                        <h4 className="modal-title">{this.props.type}</h4>
 
                         <button type="button" className="close" data-dismiss="modal" aria-hidden="true">×</button> 
                     </div>
@@ -39,7 +39,7 @@ class Modal extends React.Component {
                     <div className="modal-footer">
 
                         <div className="col">
-                            <span className="btn" >Check changes careffully </span><br /> 
+                            <span className="btn" >Check fields careffully </span><br /> 
                 
                         </div>
                 

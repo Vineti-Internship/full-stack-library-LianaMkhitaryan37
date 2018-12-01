@@ -8,5 +8,5 @@ export const AuthorContext =  React.createContext({
     deleteFromContext : (i) =>{
         // authors.data.splice(i);
     },
-    updateData: () =>{}
+    updateData: (i,n) =>{}
 });

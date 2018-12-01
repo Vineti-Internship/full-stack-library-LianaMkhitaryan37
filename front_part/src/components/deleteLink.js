@@ -6,6 +6,7 @@ export const Delete = (props) =>{
         try {
             // window.removeEventListener('click', rem());
             (async () => {
+                // console.log(props.id)
             await fetch(`http://localhost:3000/api/v1/authors/${props.id}`, {
                 method: 'DELETE'
             });
@@ -19,16 +20,12 @@ export const Delete = (props) =>{
             console.error('ex:', ex);
         }
     }
-    // props.handleClick()
-    // const crem= (c) =>{
-    //     c.splice(props.index,1)
-    // }
     return (
         <AuthorContext.Consumer>
          {(context) => (
          <span  onClick={() => {
-             context[1](props.index);
-            //  context.deleteFromContext(props.index);
+            //  console.log(props.id)
+             context.deleteAction(props.id);
              rem();
             }  }  className="card-link">Delete</span>   
         )}

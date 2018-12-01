@@ -1,4 +1,5 @@
 import React from 'react';
+import { AuthorContext } from '../context/authors_context';
 
 export class AuthorInfo extends React.PureComponent{
     constructor(props) {
@@ -30,51 +31,38 @@ export class AuthorInfo extends React.PureComponent{
             bio: value
         }); 
     }
-    ChangeInfo(){
-        // try{
-        try {
-            (async () => {
-            await fetch(`http://localhost:3000/api/v1/authors/${this.props.id}`, {
-                method: 'PATCH',
-                headers: { 'Content-Type':'application/x-www-form-urlencoded' },
-                body: JSON.stringify({author: ''})
-            });
-            // console.log(JSON.stringify({author:this.state}))
-        })();
-        } catch(ex) {
-            console.error('ex:', ex);
+    ChangeInfo(url,m,c =null){
+        if(this.state.FullName && this.state.email && this.state.imageUrl && this.state.bio ){
+            try {
+                // `http://localhost:3000/api/v1/authors/${this.props.id}`
+            //  (async () => {
+                fetch(url, {
+                    method: m,//'PATCH',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({author:this.state })
+                }).then( (re) => {
+                    if(re.ok){
+                        if(c) 
+                            //c.addToContext(re);
+                            re.json().then(data => c.addToContext(data ));
+                        }
+                   
+                    else {
+                        alert("Somethingg went wrong; Email must be unique ");
+                        console.clear();
+                    }
+                 } );
+                // console.log(JSON.stringify({author:this.state}))
+            }//)();
+            catch(ex) {
+                console.error('ex:', ex);
+                alert("invalid data")
+            }
         }
-
-            // console.log(JSON.stringify({author:this.state}))   
-            //     fetch(`http://localhost:3000/api/v1/authors/${this.props.id}`, {
-            //         method: 'PATCH',
-            //         body:  JSON.stringify({author:this.state})
-            //     })
-            //     .then((r)=>console.log(r));  
-            // const $=window.$;
-        //     $.ajax({
-        //         headers : {
-        //             'Accept' : 'application/json',
-        //             'Content-Type' : 'application/json'
-        //         },
-        //         url : `http://localhost:3000/api/v1/authors/${this.props.id}`,
-        //         type : 'PATCH',
-        //         data : JSON.stringify({author:this.state}),
-        //         success : function(response, textStatus, jqXhr) {
-        //             console.log("Venue Successfully Patched!");
-        //         },
-        //         error : function(jqXHR, textStatus, errorThrown) {
-        //             // log the error to the console
-        //             console.log("The following error occured: " + textStatus, errorThrown);
-        //         },
-        //         complete : function() {
-        //             console.log("Venue Patch Ran");
-        //         }
-        //     });
-        //   }
-        //   catch(e){
-        //     console.log(e);
-        //   }
+        else
+            alert("insert whole data")
     }
     render(){
         return(
@@ -92,7 +80,21 @@ export class AuthorInfo extends React.PureComponent{
                 <textarea rows="7"  onChange={e => this.onChangeBio(e.target.value)} className="form-control" value={this.state.bio} placeholder="Edit Bio" required="required" />
             </div>
             <div className="form-group">
-                <button type="button"  data-dismiss="modal" aria-hidden="true" onClick={() => {this.ChangeInfo()}} className="btn btn-primary btn-lg btn-block login-btn">Edit</button>
+                 <AuthorContext.Consumer>
+                 {(context) => (
+                   (this.props.type==="Edit")?
+                    <button type="button"  data-dismiss="modal" aria-hidden="true" onClick={() => {
+                        this.ChangeInfo(`http://localhost:3000/api/v1/authors/${this.props.id}`,'PATCH');
+                        // console.log(this.props)
+                        context.updateContext(this.props.id,this.state)
+                    }} className="btn btn-primary btn-lg btn-block login-btn">Edit</button> : 
+                    <button type="button"  data-dismiss="modal" aria-hidden="true" onClick={() => {
+                        this.ChangeInfo("http://localhost:3000/api/v1/authors/",'POST',context);
+                        // console.log(this.props)
+                        //context.addToContext(this.state)
+                    }} className="btn btn-primary btn-lg btn-block login-btn">Add new Author</button> 
+                 )}
+                </AuthorContext.Consumer>
             </div>
         </React.Fragment>            
         )
@@ -100,3 +102,4 @@ export class AuthorInfo extends React.PureComponent{
 }
 
 
+// {...this.state,id:this.props.id}

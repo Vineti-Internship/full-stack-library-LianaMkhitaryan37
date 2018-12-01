@@ -3,4 +3,5 @@ class BookSerializer < ActiveModel::Serializer
   def authorName
     object&.author&.FullName;
   end
+  belongs_to :author
 end

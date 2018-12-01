@@ -17,19 +17,21 @@ class Author extends React.Component {
           <p className="card-text">{element.bio}</p>
         </div>
         <ul className="list-group list-group-flush">
-          <li className="list-group-item">Email : {element.email}</li>
+          <li className="list-group-item">Email : {(element.email)? (element.email): "This Author doesn't provide public email address"}</li>
           <li className="list-group-item"> {(element.books.length>0)?`Last Added Book:${element.books[element.books.length-1].title}` :"This author doesn't have added books yet" }</li>
         </ul>
         <div className="card-body">
         {/* handleClick={authors.deleteAuthor(index)}  index={index} */}
-          <Delete id={element.id} index ={element.index}/>
-          <EditLink>
+          <Delete id={element.id}/>
+          <EditLink type="Edit">
                 <AuthorInfo 
                   FullName= {element.FullName} 
                   email={element.email}
                   imageUrl={element.imageUrl}
                   bio={element.bio}
                   id={element.id}
+                  index ={index}
+                  type="Edit"
                 />
           </EditLink>
           {/* <a href="#" className="card-link">Edit</a> */}
@@ -46,7 +48,7 @@ class Author extends React.Component {
         <AuthorContext.Consumer>
         {(context) => (
           <div className='container row' >
-            {this.createThumbnails(context[0])}
+            {this.createThumbnails(context.data)}
           </div>
         )}
         </AuthorContext.Consumer>
