@@ -3,6 +3,7 @@ import {AuthorContext} from '../context/authors_context'
 import EditLink from './editLink';
 import {AuthorInfo} from './editAuthor';
 import {Delete} from './deleteLink';
+import { CreateBook } from './createButton';
 class Author extends React.Component {
 
   createThumbnails = (authors) => {
@@ -34,6 +35,7 @@ class Author extends React.Component {
                   type="Edit"
                 />
           </EditLink>
+          <CreateBook id={element.id} />
           {/* <a href="#" className="card-link">Edit</a> */}
        </div>
       </div>

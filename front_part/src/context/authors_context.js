@@ -4,9 +4,8 @@ const authors = {
     data :null
 };
 export const AuthorContext =  React.createContext({
-    authors,
-    deleteFromContext : (i) =>{
-        // authors.data.splice(i);
-    },
-    updateData: (i,n) =>{}
+    authors
+});
+export const BookContext =  React.createContext({
+    books : authors 
 });
