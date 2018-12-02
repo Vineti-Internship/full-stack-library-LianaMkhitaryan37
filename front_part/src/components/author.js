@@ -7,7 +7,6 @@ import { CreateBook } from './createButton';
 class Author extends React.Component {
 
   createThumbnails = (authors) => {
-    // console.log(authors);
     let Thumbnails = []
     authors.forEach((element,index) => {
       Thumbnails.push(
@@ -22,7 +21,6 @@ class Author extends React.Component {
           <li className="list-group-item"> {(element.books.length>0)?`Last Added Book:${element.books[element.books.length-1].title}` :"This author doesn't have added books yet" }</li>
         </ul>
         <div className="card-body">
-        {/* handleClick={authors.deleteAuthor(index)}  index={index} */}
           <Delete id={element.id}/>
           <EditLink type="Edit">
                 <AuthorInfo 
@@ -36,7 +34,6 @@ class Author extends React.Component {
                 />
           </EditLink>
           <CreateBook id={element.id} />
-          {/* <a href="#" className="card-link">Edit</a> */}
        </div>
       </div>
 

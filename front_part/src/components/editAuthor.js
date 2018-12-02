@@ -34,10 +34,8 @@ export class AuthorInfo extends React.PureComponent{
     ChangeInfo(url,m,c =null){
         if(this.state.FullName && this.state.email && this.state.imageUrl && this.state.bio ){
             try {
-                // `http://localhost:3000/api/v1/authors/${this.props.id}`
-            //  (async () => {
                 fetch(url, {
-                    method: m,//'PATCH',
+                    method: m,
                     headers: {
                         "Content-Type": "application/json"
                     },
@@ -45,7 +43,6 @@ export class AuthorInfo extends React.PureComponent{
                 }).then( (re) => {
                     if(re.ok){
                         if(c) 
-                            //c.addToContext(re);
                             re.json().then(data => c.addToContext(data ));
                         }
                    
@@ -54,8 +51,7 @@ export class AuthorInfo extends React.PureComponent{
                         console.clear();
                     }
                  } );
-                // console.log(JSON.stringify({author:this.state}))
-            }//)();
+            }
             catch(ex) {
                 console.error('ex:', ex);
                 alert("invalid data")
@@ -85,13 +81,10 @@ export class AuthorInfo extends React.PureComponent{
                    (this.props.type==="Edit")?
                     <button type="button"  data-dismiss="modal" aria-hidden="true" onClick={() => {
                         this.ChangeInfo(`http://localhost:3000/api/v1/authors/${this.props.id}`,'PATCH');
-                        // console.log(this.props)
                         context.updateContext(this.props.id,this.state)
                     }} className="btn btn-primary btn-lg btn-block login-btn">Edit</button> : 
                     <button type="button"  data-dismiss="modal" aria-hidden="true" onClick={() => {
                         this.ChangeInfo("http://localhost:3000/api/v1/authors/",'POST',context);
-                        // console.log(this.props)
-                        //context.addToContext(this.state)
                     }} className="btn btn-primary btn-lg btn-block login-btn">Add new Author</button> 
                  )}
                 </AuthorContext.Consumer>

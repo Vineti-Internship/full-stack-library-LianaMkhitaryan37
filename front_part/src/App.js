@@ -41,7 +41,7 @@ class App extends React.PureComponent {
     const ncontext = [...this.state.books,newElem];
     this.setState({books : ncontext})
   }
-  // isLoading: false ,
+  
   componentDidMount() {
     try{
       fetch('http://localhost:3000/api/v1/authors')
@@ -92,13 +92,12 @@ class App extends React.PureComponent {
               </li>
             </ul>      
            <BookContext.Provider value={
-          { 
-            books: this.state.books,
-            addBook: this.addBook
-          }} >
+              { 
+                books: this.state.books,
+                addBook: this.addBook
+              }} >
             <Author /> 
-              </BookContext.Provider>
-            {/* handleAdd={this.state.addToContext} */}
+            </BookContext.Provider>
            
           </div>
         </AuthorContext.Provider>
@@ -112,8 +111,6 @@ class App extends React.PureComponent {
       <BookContext.Provider value={
        { 
         books: this.state.books,
-        // ,deleteAction:this.state.deleteFromContext,
-        // updateContext: this.state.updateContext,
         addBook: this.addBook
       }
 
